@@ -1,0 +1,9 @@
+*~
+*.class
+*.dex
+*.apk
+/gen/
+/bin/
+/out/
+/.idea/
+local.properties

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">System Trigger</string>
+    <string name="startup_app_package">Package name of Startup App</string>
+    <string name="startup_cmd">Command to execute on Startup</string>
+    <string name="shutdown_cmd">Command to execute on Shutdown</string>
+    <string name="check_cmd">Check</string>
+    <string name="save">Save</string>
+    <string name="launch">Launch App</string>
+    <string name="msg_cmd_invalid">Command %s is invalid.</string>
+    <string name="msg_no_cmd">No command is specified.</string>
+    <string name="msg_cmd_isok">Commands are valid.</string>
+    <string name="msg_cmd_saved">Commands are saved successfully.</string>
+    <string name="version_name">0.10</string>
+    <string name="about">About</string>
+    <string name="about_license">
+System Trigger : Copyright 2014 Lee Chee Meng
+\n\n
+Licensed under the Apache License, Version 2.0 (the "License");
+\n
+you may not use this product except in compliance with the License.
+\n
+You may obtain a copy of the License at
+\n
+http://www.apache.org/licenses/LICENSE-2.0
+\n\n
+The source code is released at 
+\n
+https://github.com/skyleecm/systemtrigger
+</string>
+</resources>
