@@ -8,6 +8,7 @@
 package com.timelesssky.systemtrigger;
 
 import android.app.*;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.os.AsyncTask;
+import eu.chainfire.libsuperuser.Shell;
 
 
 public class MainActivity extends Activity
@@ -26,6 +29,14 @@ public class MainActivity extends Activity
     private Button btnCheckCmd;
     private Button btnSave;
     private Button btnLaunch;
+    private Button btnReboot;
+    private Button btnRebootRecovery;
+    private boolean suAvailable = false;
+    public static final String cmd_prop_shutdown = "setprop sys.shutdown.requested 1";
+    public static final String cmd_bc_shutdown = "am broadcast -a " + Intent.ACTION_SHUTDOWN;
+    public static final String cmd_wait_shutdown = "sleep ";
+    public static final String cmd_reboot = "/system/bin/reboot";
+    public static final String cmd_reboot_recovery = "/system/bin/reboot recovery";
 
     /** Called when the activity is first created. */
     @Override
@@ -62,6 +73,10 @@ public class MainActivity extends Activity
                 App.launchApp(MainActivity.this, editStartupApp.getText().toString());
             }
         });
+        btnReboot = (Button) findViewById(R.id.btnReboot);
+        btnRebootRecovery = (Button) findViewById(R.id.btnRebootRecovery);
+        // suAvailable
+        (new SuCheck()).execute();
     }
 
     @Override
@@ -76,6 +91,9 @@ public class MainActivity extends Activity
         switch(id) {
             case R.id.menuAbout:
                 showAbout();
+                return true;
+            case R.id.menuSettings:
+                showPrefs();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -134,12 +152,52 @@ public class MainActivity extends Activity
         builder.setMessage(info);
         final AlertDialog dialog = builder.create();
         FragmentManager manager = getFragmentManager();
-        new DialogFragment() {
+        DialogFragment frag = new DialogFragment() {
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
                 return dialog;
             }
-        }.show(manager, "About");
+        };
+        frag.setRetainInstance(true); // fix rotation
+        frag.show(manager, "About");
+    }
+
+    void showPrefs() {
+        Intent intent = new Intent(this, PrefsActivity.class);
+        startActivity(intent);
+    }
+
+    private void setSuCommand(final Button btn, final String cmd) {
+        btn.setEnabled(true);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                (new App.SuCmd()).execute(cmd_prop_shutdown,
+                        cmd_bc_shutdown, 
+                        cmd_wait_shutdown + App.getRebootWait(), 
+                        cmd);
+            }
+        });
+    }
+
+    private class SuCheck extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... p) {
+            suAvailable = Shell.SU.available();
+            return suAvailable;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                setSuCommand(btnReboot, cmd_reboot);
+                setSuCommand(btnRebootRecovery, cmd_reboot_recovery);
+            }
+            else { 
+                btnReboot.setEnabled(false);
+                btnRebootRecovery.setEnabled(false);
+            }
+        }
     }
 
 }

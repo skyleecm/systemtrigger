@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory
+    android:key="reboot"
+    android:title="@string/titleReboot">
+
+    <EditTextPreference
+        android:title="@string/titleRebootWait"
+        android:summary=""
+        android:key="rebootWait"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:defaultValue="1"
+    ></EditTextPreference>
+
+</PreferenceCategory>
+</PreferenceScreen>
