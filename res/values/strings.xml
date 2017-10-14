@@ -7,11 +7,17 @@
     <string name="check_cmd">Check</string>
     <string name="save">Save</string>
     <string name="launch">Launch App</string>
+    <string name="reboot_avail">Reboot is available only on rooted devices</string>
+    <string name="reboot">Reboot</string>
+    <string name="reboot_rec">Reboot to recovery</string>
+    <string name="titleReboot">Reboot option</string>
+    <string name="titleRebootWait">Wait time (in secs) before reboot</string>
     <string name="msg_cmd_invalid">Command %s is invalid.</string>
     <string name="msg_no_cmd">No command is specified.</string>
     <string name="msg_cmd_isok">Commands are valid.</string>
     <string name="msg_cmd_saved">Commands are saved successfully.</string>
-    <string name="version_name">0.10</string>
+    <string name="version_name">0.20</string>
+    <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="about_license">
 System Trigger : Copyright 2014 Lee Chee Meng

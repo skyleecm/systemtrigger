@@ -14,8 +14,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.os.AsyncTask;
 
 import java.io.File;
+import eu.chainfire.libsuperuser.Shell;
 
 public class App extends Application {
 
@@ -53,6 +55,10 @@ public class App extends Application {
         appPref.edit().putString("appStartup", app).apply();
     }
 
+    public static String getRebootWait() {
+        return appPref.getString("rebootWait", "1");
+    }
+
     // launch an app
     public static void launchApp(Context context, String packageName) {
         PackageManager pm = context.getPackageManager();
@@ -71,5 +77,13 @@ public class App extends Application {
         String[] cmds = cmd.split(" ", 2);
         File file = new File(cmds[0]);
         return file.isFile() && file.canExecute();
+    }
+
+    public static class SuCmd extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... cmds) {
+            Shell.SU.run(cmds);
+            return null;
+        }
     }
 }

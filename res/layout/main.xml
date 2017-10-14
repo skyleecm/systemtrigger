@@ -92,6 +92,31 @@
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="6dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginBottom="3dp"
+    android:text="@string/reboot_avail"
+    />
+<Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:enabled="false"
+    android:id="@+id/btnReboot"
+    android:text="@string/reboot"
+    />
+<Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:enabled="false"
+    android:id="@+id/btnRebootRecovery"
+    android:text="@string/reboot_rec"
+    />
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:singleLine="false"
     android:id="@+id/msgCheck"
