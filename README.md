@@ -10,6 +10,12 @@ Currently, it does only 2 things:
 
 ----
 
+In version 0.20, the tool adds reboot and reboot to recovery buttons. (Both are enabled only if the device is rooted)
+
+The code now depends on [libsuperuser](https://github.com/Chainfire/libsuperuser).
+
+----
+
 [Download System Trigger from Google Play](https://play.google.com/store/apps/details?id=com.timelesssky.systemtrigger).
 
 Please check http://www.timelesssky.com/blog/system-trigger for more info.
